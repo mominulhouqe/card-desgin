@@ -10,6 +10,7 @@ export class CalendarComponent implements OnInit {
   currentDate!: Date;
   selectedMonth!: number;
   selectedYear!: number;
+  selectedDate!: string;
 
   constructor() { }
 
@@ -70,20 +71,40 @@ export class CalendarComponent implements OnInit {
   }
 
   navigateToMonth(month: number): void {
-    if (month < 0) {
+    this.selectedMonth += month;
+
+    if (this.selectedMonth < 0) {
+      this.selectedMonth = 11;
       this.selectedYear--;
-      this.selectedMonth = 11; // Set to December (11) if going back from January
-    } else if (month > 11) {
+    } else if (this.selectedMonth > 11) {
+      this.selectedMonth = 0;
       this.selectedYear++;
-      this.selectedMonth = 0; // Set to January (0) if going forward from December
-    } else {
-      this.selectedMonth = month;
     }
+
     this.generateCalendar();
   }
 
   navigateToYear(year: number): void {
-    this.selectedYear = year;
+    this.selectedYear += year;
     this.generateCalendar();
+  }
+
+  updateCalendar(): void {
+    const date = new Date(this.selectedDate);
+    this.selectedMonth = date.getMonth();
+    this.selectedYear = date.getFullYear();
+    this.generateCalendar();
+  }
+
+  isSelectedDate(day: number): boolean {
+    const selectedDate = new Date(this.selectedDate).getDate();
+    const selectedMonth = new Date(this.selectedDate).getMonth();
+    const selectedYear = new Date(this.selectedDate).getFullYear();
+
+    return (
+      day === selectedDate &&
+      this.selectedYear === selectedYear &&
+      this.selectedMonth === selectedMonth
+    );
   }
 }

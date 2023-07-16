@@ -2,12 +2,15 @@
   <h1 class="text-center my-3">Calendar</h1>
 
   <h2>
-    <button class="btn btn-link calendar-nav" (click)="navigateToYear(selectedYear - 1)"><i class="fas fa-angle-double-left"></i> Year</button>
-    <button class="btn btn-link calendar-nav" (click)="navigateToMonth(selectedMonth - 1)"><i class="fas fa-angle-left"></i> Month</button>
+    <button class="btn btn-link calendar-nav" (click)="navigateToYear(-1)"><i class="fas fa-angle-double-left"></i> Year</button>
+    <button class="btn btn-link calendar-nav" (click)="navigateToMonth(-1)"><i class="fas fa-angle-left"></i> Month</button>
     {{ selectedMonth + 1 }}/{{ selectedYear }}
-    <button class="btn btn-link calendar-nav" (click)="navigateToMonth(selectedMonth + 1)"><i class="fas fa-angle-right"></i> Month</button>
-    <button class="btn btn-link calendar-nav" (click)="navigateToYear(selectedYear + 1)">Year <i class="fas fa-angle-double-right"></i></button>
+    <button class="btn btn-link calendar-nav" (click)="navigateToMonth(1)"><i class="fas fa-angle-right"></i> Month</button>
+    <button class="btn btn-link calendar-nav" (click)="navigateToYear(1)">Year <i class="fas fa-angle-double-right"></i></button>
   </h2>
+
+  <input type="date" class="form-control mb-3 p-2" [(ngModel)]="selectedDate" (change)="updateCalendar()" name="" id="">
+
 
   <table class="table table-bordered">
     <thead>
@@ -24,7 +27,7 @@
     <tbody>
       <tr *ngFor="let week of calendar">
         <ng-container *ngFor="let day of week">
-          <td [class.current-day]="isCurrentDay(day)" [class.today]="isToday(day)">{{ day }}</td>
+          <td [class.current-day]="isCurrentDay(day)" [class.today]="isToday(day)" [class.selected]="isSelectedDate(day)">{{ day }}</td>
         </ng-container>
       </tr>
     </tbody>
