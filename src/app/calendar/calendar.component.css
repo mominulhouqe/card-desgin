@@ -59,3 +59,25 @@
     }
   }
   
+  .btn{
+    border: 2px solid;
+  }
+
+
+  .calendar-nav {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin: 0 5px;
+    padding: 0;
+  }
+  
+  .calendar-nav:hover {
+    color: #0056b3;
+    text-decoration: none;
+  }
+  
+  .current-day,
+  .today {
+    font-weight: bold;
+  }
+  
